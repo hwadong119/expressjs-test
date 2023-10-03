@@ -1,6 +1,7 @@
 const express = require('express');
-const usersController = require('./controllers/users.controller');
-const postsController = require('./controllers/posts.controller');
+
+const usersRouter = require('./routes/users.router');
+const postsRouter = require('./routes/posts.router');
 
 const PORT = 4000;
 
@@ -13,14 +14,12 @@ app.use((req, res, next) => {
   console.log(`start: ${req.method} ${req.url}`);
   next();
   const diffTime = Date.now() - start;
-  console.log(`end: ${req.method} ${req.url} ${diffTime}ms`);
+  console.log(`end: ${req.method} ${req.baseUrl} ${req.url} ${diffTime}ms`);
 })
 
-app.get('/users', usersController.getUsers);
-app.get('/users/:userId', usersController.getUser);
-app.post('/users', usersController.postUser);
+app.use('/users', usersRouter);
 
-app.get('/posts', postsController.getPost);
+app.use('/posts', postsRouter);
 
 
 app.listen(PORT, () => {
