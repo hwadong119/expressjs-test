@@ -8,7 +8,10 @@ const PORT = 4000;
 
 const app = express();
 
-app.use('/static', express.static(path.join(__dirname, 'public')))
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 
@@ -18,6 +21,12 @@ app.use((req, res, next) => {
   next();
   const diffTime = Date.now() - start;
   console.log(`end: ${req.method} ${req.baseUrl} ${req.url} ${diffTime}ms`);
+});
+
+app.get('/', (req, res) => {
+  res.render('index', {
+    imageTitle: 'It is a forest2'
+  })
 })
 
 app.use('/users', usersRouter);
