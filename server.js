@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 
 const usersRouter = require('./routes/users.router');
 const postsRouter = require('./routes/posts.router');
@@ -6,6 +7,8 @@ const postsRouter = require('./routes/posts.router');
 const PORT = 4000;
 
 const app = express();
+
+app.use('/static', express.static(path.join(__dirname, 'public')))
 
 app.use(express.json());
 
