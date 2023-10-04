@@ -31,10 +31,15 @@ app.use((req, res, next) => {
   console.log(`end: ${req.method} ${req.baseUrl} ${req.url} ${diffTime}ms`);
 });
 
-app.get('/', (req, res) => {
-  res.render('index', {
-    imageTitle: 'It is a forest2'
-  })
+app.get('/', (req, res, next) => {
+  setImmediate(() => { next( new Error('It is an error'));})
+  // res.render('index', {
+  //   imageTitle: 'It is a forest2'
+  // })
+})
+
+app.use((error, req, res, next) => {
+  res.json({ message: error.message });
 })
 
 app.use('/users', usersRouter);
