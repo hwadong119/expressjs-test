@@ -6,6 +6,7 @@ const usersRouter = require('./routes/users.router');
 const postsRouter = require('./routes/posts.router');
 
 const mongoose = require("mongoose");
+const productsRouter = require('./routes/products.router');
 
 const PORT = 4000;
 
@@ -37,8 +38,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/users', usersRouter);
-
 app.use('/posts', postsRouter);
+app.use('/products', productsRouter);
 
 
 app.listen(PORT, () => {

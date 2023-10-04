@@ -1,6 +1,6 @@
-const { mongo } = require("mongoose");
+const { default: mongoose } = require("mongoose");
 
-const productSchema = new mongo.Schema({
+const productSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
